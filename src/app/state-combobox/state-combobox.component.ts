@@ -14,7 +14,7 @@ export class StateComboboxComponent implements OnInit {
     }
 
     public onSelectionChange(event) {
-        console.log(event)
-        console.log(this.selection)
+        console.log(`event: ${JSON.stringify(event)}`)
+        console.log(`selection: ${JSON.stringify(this.selection)}`)
     }
 }

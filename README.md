@@ -1,27 +1,25 @@
-# Combobox
+This repo is intended to show a possible bug with the clr-combobox component.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
+When loading the app there is a single page with a combobox allowing the choice of two items. The method  `onSelectionChange` is bound to the `clrSelectionChange` output to log the value of the emitted event and `this.selection`.
 
-## Development server
+The console logs show what one would expect when selecting the CA as the first item. Both the event and the selection var show the object for CA selected.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+event: {"model":[{"name":"CA"}]}
+selection: [{"name":"CA"}]
+```
 
-## Code scaffolding
+Removing the selected CA item from the combobox also shows what one would expect, an empty selection array and the event model to be null.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+event: {"model":null}
+selection: []
+```
 
-## Build
+But then adding any item back to the combobox has unexpected results. Here we see that the event includes the selected object in it's model, but the selection var is null.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+event: {"model":[{"name":"CA"}]}
+selection: null
+```
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
